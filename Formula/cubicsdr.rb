@@ -2,7 +2,7 @@ require "formula"
 
 class Cubicsdr < Formula
   homepage "https://github.com/cjcliffe/CubicSDR"
-  url "https://github.com/cjcliffe/CubicSDR/archive/0.2.3.tar.gz"
+  url "https://github.com/cjcliffe/CubicSDR/archive/0.2.5.tar.gz"
   sha256 "b058883a82c466530000ec15aa6c7f690036efb0374ca4da87da441fbd2043cf"
   head "https://github.com/cjcliffe/CubicSDR.git"
 
@@ -18,16 +18,8 @@ class Cubicsdr < Formula
   def install
     mkdir "build" do
       system "cmake", "..", *std_cmake_args
-      system "make"
-
-      libexec.install Dir["x64/*"]
-      (bin/"CubicSDR").write <<~EOS
-        #!/usr/bin/env bash
-        (
-            cd #{libexec}
-            ./CubicSDR
-        )
-      EOS
+      system "cmake", "--build", "."
+      system "cmake", "--build", ".", "--target", "install"
     end
   end
 end

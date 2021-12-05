@@ -16,7 +16,7 @@ class Soapyaudio < Formula
   end
 
   test do
-    assert_match "Checking driver 'rtlsdr'... PRESENT",
-                 shell_output("#{Formula["soapysdr"].bin}/SoapySDRUtil --check=rtlsdr")
+    assert_match "Checking driver 'soapysdr'... PRESENT",
+                 shell_output("#{Formula["soapysdr"].bin}/SoapySDRUtil --check=audio")
   end
 end
